@@ -1,0 +1,19 @@
+{
+  "name": "rework-rule-packer",
+  "version": "0.0.1",
+  "description": "Pack same CSS rules into one rule",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/morishitter/rework-rule-packer/git"
+  },
+  "keywords": ["css","rework","optimization"],
+  "author": "Masaaki Morishita",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
