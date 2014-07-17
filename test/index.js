@@ -1,6 +1,23 @@
-var test = require('colored-tape')
-var rework-rule-packer = require('..')
+var fs = require('fs');
+var rework = require('rework');
+var expect = require('chai').expect;
+var packer = require('../');
 
-test('description', function (t) {
-  t.end()
-})
+function fixture(name) {
+  return fs.readFileSync('test/fixtures/' + name + '.css', 'utf8').trim();
+}
+
+function compareFixtures(name) {
+  return expect(
+    rework(fixture(name))
+    .use(packer)
+    .toString().trim()
+  ).to.equal(fixture(name + '.out'));
+}
+
+describe('rework-rule-packer', function() {
+  it('pack rulesets', function() {
+    compareFixtures('pack');
+  });
+});
+
