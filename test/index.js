@@ -19,5 +19,9 @@ describe('rework-rule-packer', function() {
   it('pack rulesets', function() {
     compareFixtures('pack');
   });
+
+  it('pack rulesets', function() {
+    compareFixtures('multi-pack');
+  });
 });
 
