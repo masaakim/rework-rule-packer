@@ -1,31 +1,35 @@
 module.exports = function (ast, rework) {
 
     var tmpSelector = []
+    var tmpDecls = {}
     var newDecls = []
+    var deleteIndex = []
 
-    ast.rules.forEach(function visit(rule) {
-        if (rule.rules) rule.rule.forEach(visit);
+    ast.rules.forEach(function (rule, index, arr) {
 
-        rule.selectors.forEach(function (selector) {
-            if (s !== []) {
-                var count = 0;
-                tmpSelector.forEach(function (tmpS) {
-                    if (selector === tmpS) count++;
-                })
-                if (!count) {
-                    rule.declarations.forEach(function (declaration) {
-                        newDecls.push(declaration)
-                    })
-                }
-            } else {
-                tmpSelector.push(selector)
-                rule.declarations.forEach(function (declaration) {
-                    newDecls.push(declaration)
-                })
+        var selectors = rule.selectors.join(', ')
+        var count = 0;
 
+        tmpSelector.forEach(function (tmpS) {
+            if (selectors === tmpS) {
+                count++
+                return
             }
         })
+
+        if (!count) {
+            tmpSelector.push(selectors)
+            tmpDecls[selectors] = rule.declarations
+            deleteIndex.push(index)
+        }
+        else {
+            Array.prototype.push.apply(tmpDecls[selectors], rule.declarations)
+            rule.declarations = tmpDecls[selectors]
+        }
     })
 
-    console.log(newDecls)
+    deleteIndex.forEach(function (index) {
+        delete ast.rules.splice(index, 1)
+    })
+
 }
