@@ -1,7 +1,7 @@
 {
   "name": "rework-rule-packer",
   "version": "0.0.1",
-  "description": "Pack same CSS rules into one rule",
+  "description": "Rework plugin for packing same CSS rules into one rule",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha"
